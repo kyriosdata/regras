@@ -1,6 +1,12 @@
 # regras
 Biblioteca para Execução de Regras (BER). 
 
+[<img src="https://api.travis-ci.org/kyriosdata/saep.svg?branch=master">](https://travis-ci.org/kyriosdata/saep)
+[![Dependency Status](https://www.versioneye.com/user/projects/5818f81589f0a91d55eb921c/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5818f81589f0a91d55eb921c)
+[![Sonarqube](https://sonarqube.com/api/badges/gate?key=com.github.kyriosdata.saep:saep-dominio)](https://sonarqube.com/dashboard/index?id=com.github.kyriosdata.saep%3Asaep-dominio)
+[![Javadocs](http://javadoc.io/badge/com.github.kyriosdata.regras/regras.svg)](http://javadoc.io/doc/com.github.kyriosdata.regras/regras)
+
+
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 <img alt="Creative Commons License" style="border-width:0"
  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>

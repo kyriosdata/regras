@@ -144,13 +144,13 @@ public class AvaliadorService {
 
     /**
      * Adiciona observação ao parecer.
-     * <p>
+     *
      * <p>Caso a observacao a ser acrescentada
      * se refira a um item {@link Avaliavel} para o qual já
      * exista uma observacao, então esse observacao existente é
      * substituída por aquela fornecida. Caso contrário, a
      * observacao é simplesmente acrescentada.
-     * <p>
+     *
      * <p>A adição de uma observacao possivelmente altera o
      * conjunto de pontuações do parecer, dado que o valor de
      * um relato é substituído por outro, ou até mesmo o valor

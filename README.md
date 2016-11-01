@@ -16,6 +16,17 @@ Biblioteca para Execução de Regras (BER).
  <br />Fábio Nogueira de Lucena - Fábrica de Software - 
  Instituto de Informática (UFG).
 
+## Como usar (via maven)?
+
+Acrescente a dependencia abaixo no arquivo pom.xml:
+
+<pre>
+&lt;dependency&gt;
+  &lt;groupId&gt;com.github.kyriosdata.regras&lt;/groupId&gt;
+  &lt;artifactId&gt;regras&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
 
 ## O que é uma regra?
 Regra é o instrumento empregado para produzir um valor para uma

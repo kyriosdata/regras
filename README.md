@@ -6,7 +6,7 @@ Biblioteca para Execução de Regras (BER).
 [![Sonarqube](https://sonarqube.com/api/badges/gate?key=com.github.kyriosdata.saep:saep-dominio)](https://sonarqube.com/dashboard/index?id=com.github.kyriosdata.saep%3Asaep-dominio)
 [![Javadocs](http://javadoc.io/badge/com.github.kyriosdata.regras/regras.svg)](http://javadoc.io/doc/com.github.kyriosdata.regras/regras)
 
-
+<br />
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 <img alt="Creative Commons License" style="border-width:0"
  src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>

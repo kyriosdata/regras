@@ -18,7 +18,7 @@ Biblioteca para Execução de Regras (BER).
 
 
 ## O que é uma regra?
-Regra é o instrumento empregado para produzir um valor para uma  
+Regra é o instrumento empregado para produzir um valor para uma
 entrada. A entrada é definida por um conjunto de objetos (JSON). O 
 resultado é um valor numérico, uma data, um valor lógico ou uma 
 sequência de caracteres. A saída também é fornecida como um objeto
@@ -26,7 +26,7 @@ JSON.
 
 Abaixo segue uma regra do tipo expressão que soma os valores das 
 variáveis "x" e "y". O resultado é associado à variável identificada 
-por "soma". A variável deve ser única para um dado conjunto de regras, 
+por "soma". A variável deve ser única em um conjunto de regras, 
 ou seja, não é permitido outra regra que deve ser avaliada juntamente 
 com aquela abaixo e também define como variável o identificador 
 "soma".
@@ -35,14 +35,17 @@ com aquela abaixo e também define como variável o identificador
    "expressao": "x + y" }`
    
 Uma regra possui outros atributos, por exemplo, "valorMaximo". 
-Por exemplo, enquanto a regra acima pode resultar no valor 150,
-aquela abaixo terá como resultado o valor 107, pois esse é o valor
+Enquanto a regra acima pode resultar no valor 150, aquela abaixo 
+terá como resultado o valor 107, pois esse é o valor
 máximo indicado.
 
 `{ "variavel": "soma", 
    "expressao": "x + y",
     "valorMaximo" : 107 }`
     
+Quando não fornecidos os valores assumidos são os mais próximos do
+esperado. Consulte a regra em questão para detalhes.
+
 ## Quais são as entradas/saídas?
 As entradas são definids por objetos JSON. Os atributos desses
 objetos, quaisquer que sejam eles, são tratados como variáveis. 

@@ -52,7 +52,7 @@ Por exemplo, para o objeto JSON abaixo
 
 fornecido como entrada para a execução da regra 
 
-`{ "variavel" : "alturaEmCentimetros", "expressao" : "altura * 100" }`
+`{ "tipo" : "expressao", "variavel" : "alturaEmCentimetros", "expressao" : "altura * 100" }`
 
 produz o valor 180, que passa a estar disponível por meio da 
 variável "alturaEmCentimetros" no objeto JSON retornado

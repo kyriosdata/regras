@@ -1,0 +1,132 @@
+/*
+ * Copyright (c) 2016 Fábio Nogueira de Lucena
+ * Fábrica de Software - Instituto de Informática (UFG)
+ * Creative Commons Attribution 4.0 International License.
+ */
+
+package com.github.kyriosdata.regras.regra;
+
+import com.github.kyriosdata.regras.Avaliavel;
+import com.github.kyriosdata.regras.Valor;
+import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Regra que estabelece um valor obtido do somatório
+ * da avaliação de uma dada expressão para todos os
+ * relatos fornecidos de uma determinada classe.
+ *
+ * @see RegraCondicional
+ * @see RegraExpressao
+ * @see RegraPontosPorRelato
+ */
+public class RegraSomatorio extends RegraExpressao {
+
+    /**
+     * Identificador da classe dos relatos que deverão
+     * ser considerados. Do conjunto de relatos, apenas
+     * aqueles da classe indicada serão considerados.
+     */
+    private String classe;
+
+    /**
+     * Cria uma regra.
+     *
+     * @param variavel      O identificador (nome) da variável que retém o
+     *                      valor da avaliação da regra. Em um dado conjunto de
+     *                      regras, existe uma variável distinta para cada uma
+     *                      delas.
+     * @param descricao     Texto que fornece alguma explanação sobre a regra.
+     * @param valorMaximo   O valor máximo a ser utilizado como resultado da
+     *                      avaliação da regra. Esse valor é empregado apenas
+     *                      se a avaliação resultar em valor superior ao
+     *                      expresso por esse parâmetro.
+     * @param valorMinimo   O valor mínimo a ser utilizado como resultado da
+     *                      avaliação da regra. Esse valor é empregado apenas
+     *                      se a avaliação resultar em valor inferior ao
+     *                      expresso por esse parâmetro.
+     * @param expressao     A expressão empregada para avaliar a regra,
+     *                      conforme o tipo.
+     * @param nomeClasse Identificador da classe cujos relatos
+     *               serão considerados. O valor {@code null} indica que
+     *               todos os avaliáveis fornecidos devem ser considerados.
+     * @throws CampoExigidoNaoFornecido Caso um campo obrigatório para a
+     *                                  definição de uma regra não seja
+     *                                  fornecido.
+     */
+    public RegraSomatorio(
+            final String variavel,
+            final String descricao,
+            final float valorMaximo,
+            final float valorMinimo,
+            final String expressao,
+            final String nomeClasse) {
+        super(variavel, descricao, valorMaximo, valorMinimo, expressao);
+
+        this.classe = nomeClasse;
+    }
+
+    @Override
+    public final Valor avalie(final List<Avaliavel> avaliaveis,
+                        final Map<String, Valor> contexto) {
+        float somatorio = 0f;
+
+        for (Avaliavel avaliavel : avaliaveis) {
+            // Considera apenas avaliáveis da classe em questão
+            Valor atributo = avaliavel.get("classe");
+            String classe = atributo == null ? null : atributo.getString();
+
+            if (!this.classe.equals(classe)) {
+                continue;
+            }
+
+            // Atualiza contexto da expressão com dados do avaliável
+            for (String dd : ctx.keySet()) {
+                ctx.put(dd, prioridade(dd, avaliavel, contexto));
+            }
+
+            somatorio = somatorio + ast.valor(ctx);
+        }
+
+        return new Valor(somatorio);
+    }
+
+    /**
+     * Define o valor para uma dada variável dado um objeto avaliável
+     * e o contexto.
+     *
+     * <p>Caso o avaliável possua a variável, então o valor do avaliável
+     * prevalece. Caso contrário o valor é procurado no contexto. Se
+     * encontrado, então esse é o valor retornado. Se o valor não é
+     * encontrado nem no avaliável e nem no contexto, então o valor
+     * zero é retornado.
+     *
+     * @param variavel Identificador da variável cujo valor é desejado.
+     *
+     * @param avaliavel Objeto avaliável que pode ou não conter o valor para
+     *                  a variável.
+     *
+     * @param ctx   Contexto que definirá o valor da variável caso contenha
+     *              a variável em questão e essa não esteja presente no objeto
+     *              avaliável.
+     *
+     * @return O valor da variável conforme definido no avaliável, no contexto
+     * ou o valor zero, o que for encontrado primeiro, nessa ordem.
+     */
+    private float prioridade(final String variavel,
+                             final Avaliavel avaliavel,
+                             final Map<String, Valor> ctx) {
+        Valor v = avaliavel.get(variavel);
+        if (v != null) {
+            return v.getReal();
+        }
+
+        if (ctx.containsKey(variavel)) {
+            return ctx.get(variavel).getReal();
+        }
+
+        return 0f;
+    }
+}

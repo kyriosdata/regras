@@ -33,7 +33,7 @@ Regra é o instrumento empregado para produzir um valor para uma
 dada entrada. A entrada é definida por um conjunto de objetos (JSON). O 
 resultado é um valor numérico, uma data, um valor lógico ou uma 
 sequência de caracteres. A saída também é fornecida como um objeto
-JSON. Em tempo, já não é surpresa, uma regra também é definida por um objeto 
+JSON. Em tempo, uma regra também é definida por um objeto 
 JSON.
 
 Abaixo segue uma regra do tipo expressão que soma os valores das 

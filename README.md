@@ -105,7 +105,14 @@ coleção de valores, conforme ilustrado pelo método abaixo.
 String configuracao = // recupera conjunto de regras (JSON)
 String relatos = // recupera conjunto de objetos (JSON)
 String parametros = // recupera valores iniciais (JSON)
-String resultado = Regras.avalia(configuracao, relatos, parametros);
+Contagem resultado = Regras.avalia(configuracao, relatos, parametros);
+```
+
+Observe que o resultado é uma instância de `Contagem`. A versão JSON
+pode ser obtida com 
+
+```
+String resultado = Regras.avaliaAsJson(configuracao, relatos, parametros);
 ```
 
 Nesse ponto podemos ilustrar uma chamada completa para avaliação de

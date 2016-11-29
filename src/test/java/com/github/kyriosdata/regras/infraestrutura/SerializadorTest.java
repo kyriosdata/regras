@@ -35,7 +35,8 @@ public class SerializadorTest {
     }
 
     private void verificaValor(Valor valor) {
-        Valor recuperado = sz.valor(sz.toJson(valor));
+        String json = sz.toJson(valor);
+        Valor recuperado = sz.valor(json);
         assertEquals(valor, recuperado);
     }
 

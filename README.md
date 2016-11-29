@@ -79,10 +79,10 @@ fornecido como entrada para a execução da regra
 
 `{ "tipo" : "expressao", "variavel" : "alturaEmCentimetros", "expressao" : "altura * 100" }`
 
-o resultado produzido é 180, que passa a estar disponível por meio da 
-variável "alturaEmCentimetros" no objeto JSON retornado
+o resultado produzido é 180, que passa a estar disponível por meio do atributo 
+"alturaEmCentimetros" no objeto JSON retornado
 
-`{ "valores" : [ { "alturaEmCentimetros": 180 } ] }`
+`{ "valores" : [ { "atributo" : "alturaEmCentimetros", "valor" : { "tipo" : 0, "valor" : 180 }} ] }`
     
 ## Como executar um conjunto de regras?
 

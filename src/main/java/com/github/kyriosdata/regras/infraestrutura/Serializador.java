@@ -7,6 +7,7 @@
 package com.github.kyriosdata.regras.infraestrutura;
 
 import com.github.kyriosdata.regras.Pontuacao;
+import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
@@ -28,6 +29,7 @@ public class Serializador {
     private static Type pontuacaoType;
     private static Type regraType;
     private static Type configuracaoType;
+    private static Type relatoType;
 
     /**
      * Cria instância de serializar preparada
@@ -51,6 +53,7 @@ public class Serializador {
         pontuacaoType = new TypeToken<Pontuacao>() {}.getType();
         regraType = new TypeToken<Regra>() {}.getType();
         configuracaoType = new TypeToken<Configuracao>() {}.getType();
+        relatoType = new TypeToken<Relato>() {}.getType();
     }
 
     /**
@@ -102,6 +105,14 @@ public class Serializador {
 
     public String toJson(Configuracao v) {
         return gson.toJson(v, configuracaoType);
+    }
+
+    public Relato relato(String json) {
+        return gson.fromJson(json, relatoType);
+    }
+
+    public String toJson(Relato v) {
+        return gson.toJson(v, relatoType);
     }
 }
 

@@ -1,6 +1,7 @@
 package com.github.kyriosdata.regras.infraestrutura;
 
 import com.github.kyriosdata.regras.Pontuacao;
+import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
@@ -10,9 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -45,7 +44,7 @@ public class SerializadorTest {
         verificaPontuacao(new Pontuacao("a", new Valor(false)));
     }
 
-    public void verificaPontuacao(Pontuacao pontuacao) {
+    private void verificaPontuacao(Pontuacao pontuacao) {
         String json = sz.toJson(pontuacao);
         Pontuacao recuperado = sz.pontuacao(json);
         assertEquals(pontuacao, recuperado);
@@ -99,5 +98,20 @@ public class SerializadorTest {
         Configuracao recuperada = sz.configuracao(json);
 
         assertEquals(json, sz.toJson(recuperada));
+    }
+
+    @Test
+    public void serializarRelato() {
+        Map<String, Valor> atributos = new HashMap<>();
+        atributos.put("idade", new Valor(49f));
+
+        Relato r = new Relato("classe", atributos);
+
+        String json = sz.toJson(r);
+        System.out.println(json);
+
+        Relato recuperado = sz.relato(json);
+
+        assertEquals(json, sz.toJson(recuperado));
     }
 }

@@ -2,6 +2,7 @@ package com.github.kyriosdata.regras.infraestrutura;
 
 import com.github.kyriosdata.regras.Pontuacao;
 import com.github.kyriosdata.regras.Valor;
+import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
 import com.github.kyriosdata.regras.regra.RegraExpressao;
 import com.github.kyriosdata.regras.regra.RegraPontosPorRelato;
@@ -9,11 +10,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class SerializacaoTest {
+public class SerializadorTest {
 
     private static Serializador sz;
 
@@ -49,8 +53,19 @@ public class SerializacaoTest {
 
     @Test
     public void serializarRegraExpressao() {
-        verificaRegra(new RegraExpressao("x", "d", 1f, 0f, "1"));
-        verificaRegra(new RegraPontosPorRelato("p", "d", 1f, 0f, "t", 0.5f));
+        RegraExpressao regra1 = getRegraExpressao();
+        RegraPontosPorRelato regra2 = getRegraPontosPorRelato();
+
+        verificaRegra(regra1);
+        verificaRegra(regra2);
+    }
+
+    private RegraPontosPorRelato getRegraPontosPorRelato() {
+        return new RegraPontosPorRelato("p", "d", 1f, 0f, "t", 0.5f);
+    }
+
+    private RegraExpressao getRegraExpressao() {
+        return new RegraExpressao("x", "d", 1f, 0f, "1");
     }
 
     @Test
@@ -70,5 +85,19 @@ public class SerializacaoTest {
         String json = sz.toJson(expressao);
         Regra recuperada = sz.regra(json);
         assertEquals(expressao, recuperada);
+    }
+
+    @Test
+    public void serializarConfiguracao() {
+        List<Regra> n = new ArrayList<>();
+        n.add(getRegraExpressao());
+        n.add(getRegraPontosPorRelato());
+        Configuracao c = new Configuracao("c", "d", "detalhes", new Date(), n);
+
+        String json = sz.toJson(c);
+
+        Configuracao recuperada = sz.configuracao(json);
+
+        assertEquals(json, sz.toJson(recuperada));
     }
 }

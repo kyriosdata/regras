@@ -8,6 +8,7 @@ package com.github.kyriosdata.regras.infraestrutura;
 
 import com.github.kyriosdata.regras.Pontuacao;
 import com.github.kyriosdata.regras.Valor;
+import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,8 +18,8 @@ import java.lang.reflect.Type;
 
 /**
  * Serviço para conversão de objetos do domínio em
- * sequências de caracteres e, no sentido inverso,
- * recuperação de objetos a partir de tais sequências.
+ * JSON e, no sentido inverso,
+ * recuperação de objetos a partir do JSON gerado.
  */
 public class Serializador {
 
@@ -26,11 +27,18 @@ public class Serializador {
     private static Type valorType;
     private static Type pontuacaoType;
     private static Type regraType;
+    private static Type configuracaoType;
 
     /**
      * Cria instância de serializar preparada
      * para realizar conversões entre objetos e
      * sequências de caracters.
+     *
+     * <p>Há dois grupos de métodos principais nessa classe.
+     * Aqueles do tipo {@link #toJson(Pontuacao)}, por exemplo,
+     * cujo argumento é o objeto a ser convertido em JSON e,
+     * no sentido inverso, {@link #pontuacao(String)}, que recebe
+     * a sequência JSON e produz um objeto do tipo {@link Pontuacao}.
      */
     public Serializador() {
         GsonBuilder gb = new GsonBuilder();
@@ -42,6 +50,7 @@ public class Serializador {
         valorType = new TypeToken<Valor>() {}.getType();
         pontuacaoType = new TypeToken<Pontuacao>() {}.getType();
         regraType = new TypeToken<Regra>() {}.getType();
+        configuracaoType = new TypeToken<Configuracao>() {}.getType();
     }
 
     /**
@@ -85,6 +94,14 @@ public class Serializador {
 
     public String toJson(Regra v) {
         return gson.toJson(v, regraType);
+    }
+
+    public Configuracao configuracao(String json) {
+        return gson.fromJson(json, configuracaoType);
+    }
+
+    public String toJson(Configuracao v) {
+        return gson.toJson(v, configuracaoType);
     }
 }
 

@@ -30,9 +30,10 @@ Acrescente a dependencia abaixo no arquivo pom.xml:
 
 ## O que é uma regra?
 Regra é o instrumento empregado para produzir um valor para uma
-entrada. A entrada é definida por um conjunto de objetos (JSON). O 
+dada entrada. A entrada é definida por um conjunto de objetos (JSON). O 
 resultado é um valor numérico, uma data, um valor lógico ou uma 
 sequência de caracteres. A saída também é fornecida como um objeto
+JSON. Em tempo, já não é surpresa, uma regra também é definida por um objeto 
 JSON.
 
 Abaixo segue uma regra do tipo expressão que soma os valores das 
@@ -45,17 +46,27 @@ com aquela abaixo e também define como variável o identificador
 `{ "tipo": "expressao", "variavel": "soma", 
    "expressao": "x + y" }`
    
-Uma regra possui outros atributos, por exemplo, "valorMaximo". 
-Enquanto a regra acima pode resultar no valor 150, aquela abaixo 
-terá como resultado o valor 107, pois esse é o valor
-máximo indicado.
+Uma regra pode possuir vários atributos, alguns deles são predefinidos, 
+por exemplo, "valorMaximo". Enquanto a regra acima pode resultar no 
+valor 150, por exemplo, para os valores de x e y, 100 e 50, respectivamente,
+aquela abaixo teria como resultado o valor 107 para os mesmos valores de
+x e y, pois 107 é o valor máximo indicado para essa regra.
 
 `{ "variavel": "soma", 
    "expressao": "x + y",
     "valorMaximo" : 107 }`
     
-Quando não fornecidos os valores assumidos são os mais próximos do
-esperado. Consulte a regra em questão para detalhes.
+## O que é uma configuração?
+Em geral estamos interessados na avaliação de várias regras. Configuração
+é o meio que permite reunir várias regras. Abaixo segue uma configuração 
+que reúne as duas regras citadas acima.
+
+`{ "regras" : [
+   { "variavel": "soma", 
+   "expressao": "x + y",
+    "valorMaximo" : 107 },
+    { "tipo": "expressao", "variavel": "soma", 
+       "expressao": "x + y" }]}`
 
 ## Quais são as entradas/saídas?
 As entradas são definids por objetos JSON. Os atributos desses
@@ -68,7 +79,7 @@ fornecido como entrada para a execução da regra
 
 `{ "tipo" : "expressao", "variavel" : "alturaEmCentimetros", "expressao" : "altura * 100" }`
 
-produz o valor 180, que passa a estar disponível por meio da 
+o resultado produzido é 180, que passa a estar disponível por meio da 
 variável "alturaEmCentimetros" no objeto JSON retornado
 
 `{ "valores" : [ { "alturaEmCentimetros": 180 } ] }`

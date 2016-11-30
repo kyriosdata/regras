@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Serviço de avaliação de relatórios.
+ * Implementação do serviço de avaliação de regras.
  *
  * <p>A avaliação está organizada em duas fases:
  * (a) preparação da configuração (executada uma vez
@@ -51,15 +51,17 @@ public class AvaliadorService {
     }
 
     /**
-     * Realiza avaliação dos itens fornecidos.
+     * Avalia os relatos conforme as regras fornecidas, as observações e os
+     * parâmetros.
      *
-     * @param regras      Sequência de regras a serem avaliadas. Possivelmente
+     * @param regras      Regras a serem avaliadas. Possivelmente
      *                    a ordem em que são fornecidas não é a ordem esperada
      *                    ou correta de execução. Ou seja, dependências entre
      *                    as regras não necessariamente são contempladas nesse
      *                    parâmetro.
      * @param relatos     Conjunto de relatos sobre os quais a avaliação
-     *                    das regras será executada.
+     *                    das regras será executada. Esse é o principal
+     *                    componente da entrada.
      * @param observacoes Conjunto de pontuações que fornecem valores
      *                    "substitutos".
      * @param parametros  Conjunto de valores iniciais, possivelmente
@@ -85,10 +87,15 @@ public class AvaliadorService {
             }
         }
 
-        // Obtém itens na ordem em que devem ser avaliados.
+        // Regras são fornecidas em ordem arbitrária, contudo, a execução
+        // deve respeitar dependências entre elas. Ou seja, se uma regra
+        // depende de outra, então a "outra" deve ser executada antes da
+        // "uma".
         List<Regra> ordenadas = OrdenacaoService.ordena(regras);
 
-        // Agrupa relatos por tipo.
+        // Algumas regras aplicam-se a um subconjunto dos relatos.
+        // Um cache dos relatos por classe evita que essa avaliação
+        // seja realizada para cada uma das regras.
         Map<String, List<Avaliavel>> relatosPorTipo = montaRelatosPorTipo(relatos);
 
         for (Regra regra : ordenadas) {

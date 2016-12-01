@@ -1,0 +1,12 @@
+{
+  "data":"Dec 1, 2016 4:52:29 PM",
+  "nome":"d",
+  "descricao":"detalhes",
+  "regras":[
+    {"tipo":"expressao",
+      "obj":{"descricao":"d","valorMaximo":1.0,"valorMinimo":0.0,"variavel":"x"}},
+    {"tipo":"pontosPorRelato",
+      "obj":{"descricao":"d","valorMaximo":1.0,"valorMinimo":0.0,"variavel":"p","classe":"t"}}
+  ],
+  "id":"c"
+}

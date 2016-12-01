@@ -2,11 +2,19 @@ package com.github.kyriosdata.regras.avaliacao;
 
 import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Valor;
+import com.github.kyriosdata.regras.infraestrutura.Serializador;
+import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
 import com.github.kyriosdata.regras.regra.RegraCondicional;
 import com.github.kyriosdata.regras.regra.RegraExpressao;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -94,5 +102,23 @@ public class AvaliadorServiceTest {
 
     private Regra getCondicao() {
         return new RegraCondicional("x", "d", 10f, 0f, "2 < b", "b", "0");
+    }
+
+    private String getFullFile(String filename) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(filename).getFile());
+        return file.getAbsolutePath();
+    }
+
+    @Test
+    public void testesDeArquivosJson() throws IOException {
+        String cfgFile = getFullFile("configuracao.json");
+        System.out.println(cfgFile);
+        Path path = Paths.get(cfgFile);
+
+        String contents = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+        Serializador sz = new Serializador();
+        Configuracao c = sz.configuracao(contents);
+        System.out.println(c);
     }
 }

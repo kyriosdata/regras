@@ -95,7 +95,7 @@ public class SerializadorTest {
         Configuracao c = new Configuracao("c", "d", "detalhes", new Date(), n);
 
         String json = sz.toJson(c);
-
+        System.out.println(json);
         Configuracao recuperada = sz.configuracao(json);
 
         assertEquals(json, sz.toJson(recuperada));

@@ -6,6 +6,8 @@
 
 package com.github.kyriosdata.regras.regra;
 
+import com.github.kyriosdata.parser.Expressao;
+import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
@@ -82,7 +84,7 @@ public class RegraExpressao extends Regra {
     }
 
     @Override
-    public void preparacao(final Parser parser) {
+    public void preparacao(final IParser parser) {
         if (parser == null) {
             throw new CampoExigidoNaoFornecido("parser");
         }

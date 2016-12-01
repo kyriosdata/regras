@@ -6,9 +6,10 @@
 
 package com.github.kyriosdata.regras.regra;
 
+import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
-import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 import com.github.kyriosdata.regras.Valor;
+import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 
 import java.util.List;
 import java.util.Map;
@@ -275,7 +276,7 @@ public abstract class Regra {
      * @param parser O serviço de análise sintática
      *               a ser utilizado.
      */
-    public void preparacao(final Parser parser) {
+    public void preparacao(final IParser parser) {
     }
 
     /**

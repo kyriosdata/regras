@@ -1,11 +1,11 @@
 package com.github.kyriosdata.regras;
 
-import com.github.kyriosdata.regras.regra.Expressao;
-import com.github.kyriosdata.regras.regra.Parser;
+import com.github.kyriosdata.parser.Expressao;
+import com.github.kyriosdata.parser.IParser;
 
 import java.util.List;
 
-public class ParserTeste implements Parser {
+public class ParserTeste implements IParser {
 
     private Expressao expressaoRetorno;
     private List<String> dependencias;

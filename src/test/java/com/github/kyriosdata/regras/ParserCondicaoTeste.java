@@ -1,13 +1,13 @@
 package com.github.kyriosdata.regras;
 
-import com.github.kyriosdata.regras.regra.Expressao;
-import com.github.kyriosdata.regras.regra.Parser;
+import com.github.kyriosdata.parser.Expressao;
+import com.github.kyriosdata.parser.IParser;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ParserCondicaoTeste implements Parser {
+public class ParserCondicaoTeste implements IParser {
 
     private Map<String, List<String>> dependencias = new HashMap<>(3);
     private Map<String, Expressao> expressoes = new HashMap<>(3);

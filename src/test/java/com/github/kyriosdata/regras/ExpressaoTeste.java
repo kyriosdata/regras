@@ -1,6 +1,6 @@
 package com.github.kyriosdata.regras;
 
-import com.github.kyriosdata.regras.regra.Expressao;
+import com.github.kyriosdata.parser.Expressao;
 
 import java.util.Map;
 

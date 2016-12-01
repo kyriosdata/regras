@@ -6,6 +6,8 @@
 
 package com.github.kyriosdata.regras.regra;
 
+import com.github.kyriosdata.parser.Expressao;
+import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
@@ -110,7 +112,7 @@ public class RegraCondicional extends RegraExpressao {
     }
 
     @Override
-    public final void preparacao(final Parser parser) {
+    public final void preparacao(final IParser parser) {
         super.preparacao(parser);
 
         List<String> de = parser.dependencias(entao);

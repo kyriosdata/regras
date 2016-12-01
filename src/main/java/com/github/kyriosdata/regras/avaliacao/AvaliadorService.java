@@ -64,6 +64,11 @@ public class AvaliadorService {
             return resultados;
         }
 
+        // Preparação das regras
+        for(Regra regra : regras) {
+            regra.preparacao(null);
+        }
+
         // Parâmetros fornecidos devem estar disponíveis na avaliação
         if (parametros != null) {
             // Valores iniciais devem estar disponíveis

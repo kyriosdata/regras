@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * Regra que identifica total de pontos por dada
- * classe de relato.
+ * classe de objeto avaliável.
  */
 public class RegraPontosPorRelato extends Regra {
 

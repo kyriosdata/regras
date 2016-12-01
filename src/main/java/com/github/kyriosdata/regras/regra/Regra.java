@@ -81,7 +81,8 @@ public abstract class Regra {
      * o resultado da avaliação da regra.
      *
      * <p>Trata-se de chave natural para um dado
-     * conjunto de regras.
+     * conjunto de regras. Em tempo, uma regra só
+     * produz um único valor.
      */
     private String variavel;
 
@@ -92,6 +93,10 @@ public abstract class Regra {
      * os identificados das expressões "então" e
      * "senão". Se a regra é do tipoRelato pontos por item
      * avaliável, então a lista é vazia.
+     *
+     * <p>Convém observar que uma regra também inclui
+     * identificadores de funções que, se forem empregadas,
+     * também fazem parte dessa lista.
      */
     private List<String> dependeDe;
 

@@ -20,7 +20,8 @@ public class RegraCondicionalTest {
 
     @Test
     public void entaoObrigatoriamenteDeveSerFornecido() {
-        assertThrows(CampoExigidoNaoFornecido.class, () -> new RegraCondicional("v", "d", 1, 0, "c", null, "s"));
+        assertThrows(CampoExigidoNaoFornecido.class,
+                () -> new RegraCondicional("v", "d", 1, 0, "c", null, "s"));
     }
 
     @Test

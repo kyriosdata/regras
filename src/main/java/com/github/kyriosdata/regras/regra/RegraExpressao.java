@@ -16,8 +16,8 @@ import java.util.Map;
 
 /**
  * Regra definida por uma expressão formada por constantes,
- * variáveis (definidas em um contexto) e atributos de
- * itens avaliáveis.
+ * variáveis (definidas em um contexto), identificadores de
+ * funções e atributos de itens avaliáveis.
  *
  * <p>Uma expressão pode ser numérica, por exemplo,
  * "ch * 12.5", ou produzir um valor lógico, "3 &gt; 1".

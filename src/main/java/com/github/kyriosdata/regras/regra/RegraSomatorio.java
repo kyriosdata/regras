@@ -90,7 +90,7 @@ public class RegraSomatorio extends RegraExpressao {
             somatorio = somatorio + ast.valor(ctx);
         }
 
-        return new Valor(somatorio);
+        return new Valor(ajustaLimites(somatorio));
     }
 
     /**

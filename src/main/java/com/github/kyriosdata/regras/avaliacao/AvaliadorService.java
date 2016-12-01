@@ -21,12 +21,6 @@ import java.util.Map;
 /**
  * Implementação do serviço de avaliação de regras.
  *
- * <p>A avaliação está organizada em duas fases:
- * (a) preparação da configuração (executada uma vez
- * por configuração) e (b) execução dos relatórios.
- * Respectivamente são definidos os seguintes
- * métodos responsáveis por tais fases:
- * (a)
  */
 public class AvaliadorService {
 

@@ -48,20 +48,20 @@ public class AvaliadorServiceTest {
     }
 
     @Test
-    public void umaExpressaoDependenteDeRelato() {
+    public void umaExpressaoDependenteDeParametro() {
         AvaliadorService as = new AvaliadorService();
 
         List<Regra> regras = new ArrayList();
         regras.add(getExpressao());
 
-        Map<String, Valor> atributos = new HashMap<>(1);
-        atributos.put("a", new Valor(1.23f));
-        List<Relato> relatos = new ArrayList<>(1);
-        relatos.add(new Relato("c", atributos));
+        Map<String, Valor> parametros = new HashMap<>(1);
+        parametros.put("a", new Valor(1.23f));
 
-        Map<String, Valor> r = as.avalia(regras, relatos, null, null);
+        List<Relato> relatos = new ArrayList<>(0);
 
-        assertEquals(1, r.size());
+        Map<String, Valor> r = as.avalia(regras, relatos, null, parametros);
+
+        assertEquals(2, r.size());
         assertEquals(1.23f, r.get("x").getReal(), 0.0001d);
     }
 

@@ -347,6 +347,6 @@ public abstract class Regra {
      *
      * @return Resultado da avaliação da regra.
      */
-    public abstract Valor avalie(List<Avaliavel> avaliaveis,
+    public abstract Valor avalie(List<? extends Avaliavel> avaliaveis,
                                  Map<String, Valor> contexto);
 }

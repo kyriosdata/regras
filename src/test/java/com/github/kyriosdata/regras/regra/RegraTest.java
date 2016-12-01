@@ -73,7 +73,7 @@ class RegraParaTeste extends Regra {
     }
 
     @Override
-    public Valor avalie(List<Avaliavel> avaliaveis, Map<String, Valor> contexto) {
+    public Valor avalie(List<? extends Avaliavel> avaliaveis, Map<String, Valor> contexto) {
         return null;
     }
 }

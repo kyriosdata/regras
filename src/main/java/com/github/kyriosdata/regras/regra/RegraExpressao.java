@@ -119,7 +119,7 @@ public class RegraExpressao extends Regra {
     }
 
     @Override
-    public Valor avalie(List<Avaliavel> avaliaveis, Map<String, Valor> contexto) {
+    public Valor avalie(List<? extends Avaliavel> avaliaveis, Map<String, Valor> contexto) {
         atualizaContexto(contexto);
 
         return new Valor(ast.valor(ctx));

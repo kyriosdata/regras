@@ -74,7 +74,7 @@ public class RegraPontosPorRelato extends Regra {
     }
 
     @Override
-    public final Valor avalie(final List<Avaliavel> avaliaveis,
+    public final Valor avalie(final List<? extends Avaliavel> avaliaveis,
                         final Map<String, Valor> contexto) {
         int total = 0;
         for (Avaliavel avaliavel : avaliaveis) {

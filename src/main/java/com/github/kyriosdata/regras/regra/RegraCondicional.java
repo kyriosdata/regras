@@ -131,7 +131,7 @@ public class RegraCondicional extends RegraExpressao {
     }
 
     @Override
-    public final Valor avalie(final List<Avaliavel> avaliaveis,
+    public final Valor avalie(final List<? extends Avaliavel> avaliaveis,
                         final Map<String, Valor> contexto) {
         atualizaContexto(contexto);
 

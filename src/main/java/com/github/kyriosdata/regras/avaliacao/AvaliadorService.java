@@ -8,7 +8,6 @@ package com.github.kyriosdata.regras.avaliacao;
 import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
 import com.github.kyriosdata.regras.Observacao;
-import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 import com.github.kyriosdata.regras.infraestrutura.ParserAdapter;
@@ -54,7 +53,7 @@ public class AvaliadorService {
      */
     public Map<String, Valor> avalia(
             final List<Regra> regras,
-            final List<Relato> relatos,
+            final List<? extends Avaliavel> relatos,
             final Map<String, Valor> observacoes,
             final Map<String, Valor> parametros) {
 
@@ -100,8 +99,11 @@ public class AvaliadorService {
         for (Regra regra : ordenadas) {
 
             // A avaliação da regra pode fazer uso de apenas um
-            // subconjunto dos relatos.
-            List<Avaliavel> relatosRelevantes = relatosPorClasse.get("tipo");
+            // subconjunto dos relatos, caso uma classe seja definida.
+            List<? extends Avaliavel> relatosRelevantes = relatos;
+            if (regra.getClasse() != null) {
+                relatosRelevantes = relatosPorClasse.get(regra.getClasse());
+            }
 
             // Avalie a regra, para o contexto disponível.
             Valor valor = regra.avalie(relatosRelevantes, resultados);
@@ -132,15 +134,15 @@ public class AvaliadorService {
      * então o dicionário retornado é vazio.
      */
     private Map<String, List<Avaliavel>> montaRelatosPorTipo(
-            final List<Relato> relatos) {
+            final List<? extends Avaliavel> relatos) {
         Map<String, List<Avaliavel>> relatosPorTipo = new HashMap<>();
 
         if (relatos == null || relatos.size() == 0) {
             return relatosPorTipo;
         }
 
-        for (Relato relato : relatos) {
-            String tipo = relato.getClasse();
+        for (Avaliavel avaliavel : relatos) {
+            String tipo = avaliavel.getClasse();
 
             List<Avaliavel> lista = relatosPorTipo.get(tipo);
             if (lista == null) {
@@ -148,7 +150,7 @@ public class AvaliadorService {
                 relatosPorTipo.put(tipo, lista);
             }
 
-            lista.add(relato);
+            lista.add(avaliavel);
         }
 
         return relatosPorTipo;

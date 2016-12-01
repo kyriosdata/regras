@@ -69,7 +69,7 @@ public class RegraSomatorio extends RegraExpressao {
     }
 
     @Override
-    public final Valor avalie(final List<Avaliavel> avaliaveis,
+    public final Valor avalie(final List<? extends Avaliavel> avaliaveis,
                         final Map<String, Valor> contexto) {
         float somatorio = 0f;
 

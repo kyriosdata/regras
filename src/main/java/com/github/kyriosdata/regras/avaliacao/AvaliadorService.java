@@ -95,13 +95,13 @@ public class AvaliadorService {
         // Algumas regras aplicam-se a um subconjunto dos relatos.
         // Um cache dos relatos por classe evita que essa avaliação
         // seja realizada para cada uma das regras.
-        Map<String, List<Avaliavel>> relatosPorTipo = montaRelatosPorTipo(relatos);
+        Map<String, List<Avaliavel>> relatosPorClasse = montaRelatosPorTipo(relatos);
 
         for (Regra regra : ordenadas) {
 
-            // A avaliação da regra de um item pode depender dos
-            // relatos correspondentes. Nesse caso, recupere-os.
-            List<Avaliavel> relatosRelevantes = relatosPorTipo.get("tipo");
+            // A avaliação da regra pode fazer uso de apenas um
+            // subconjunto dos relatos.
+            List<Avaliavel> relatosRelevantes = relatosPorClasse.get("tipo");
 
             // Avalie a regra, para o contexto disponível.
             Valor valor = regra.avalie(relatosRelevantes, resultados);

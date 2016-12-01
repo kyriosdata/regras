@@ -20,14 +20,6 @@ import java.util.Map;
 public class RegraPontosPorRelato extends Regra {
 
     /**
-     * Identificador único de um tipoRelato de relato.
-     * Nem toda regra, convém destacar, refere-se
-     * a um relato. Se esse for o caso, esse valor
-     * é irrelevante.
-     */
-    private String tipoRelato;
-
-    /**
      * Quantidade de pontos definidos por item
      * {@link Avaliavel}.
      */
@@ -63,22 +55,12 @@ public class RegraPontosPorRelato extends Regra {
                                 final float valorMinimo,
                                 final String tipo,
                                 final float pontos) {
-        super(variavel, descricao, valorMaximo, valorMinimo);
+        super(variavel, descricao, valorMaximo, valorMinimo, tipo);
         if (tipo == null || tipo.isEmpty()) {
             throw new CampoExigidoNaoFornecido("tipoRelato");
         }
 
-        this.tipoRelato = tipo;
         this.pontosPorItem = pontos;
-    }
-
-    /**
-     * Recupera o tipo do relato associado à regra.
-     *
-     * @return O identificador do tipo de relato.
-     */
-    public final String getTipoRelato() {
-        return tipoRelato;
     }
 
     /**
@@ -96,7 +78,7 @@ public class RegraPontosPorRelato extends Regra {
                         final Map<String, Valor> contexto) {
         int total = 0;
         for (Avaliavel avaliavel : avaliaveis) {
-            if (tipoRelato.equals(avaliavel.get("classe").getString())) {
+            if (getClasse().equals(avaliavel.get("classe").getString())) {
                 total = total + 1;
             }
         }

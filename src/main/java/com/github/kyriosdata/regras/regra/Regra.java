@@ -102,6 +102,12 @@ public abstract class Regra {
     private List<String> dependeDe;
 
     /**
+     * Identificador da classe que restringe os relatos a
+     * serem empregados na avaliação da regra.
+     */
+    private String classe;
+
+    /**
      * Cria uma regra.
      *
      * @param resultado      O identificador (nome) da variável que retém o
@@ -142,6 +148,39 @@ public abstract class Regra {
         this.valorMaximo = maximo;
         this.valorMinimo = minimo;
         this.variavel = resultado;
+    }
+
+    /**
+     * Cria uma regra.
+     *
+     * @param resultado      O identificador (nome) da variável que retém o
+     *                      valor da avaliação da regra. Em um dado conjunto de
+     *                      regras, existe uma variável distinta para cada uma
+     *                      delas.
+     * @param detalhes     Texto que fornece alguma explanação sobre a regra.
+     * @param maximo   O valor máximo a ser utilizado como resultado da
+     *                      avaliação da regra. Esse valor é empregado apenas
+     *                      se a avaliação resultar em valor superior ao
+     *                      expresso por esse parâmetro.
+     * @param minimo   O valor mínimo a ser utilizado como resultado da
+     *                      avaliação da regra. Esse valor é empregado apenas
+     *                      se a avaliação resultar em valor inferior ao
+     *                      expresso por esse parâmetro.
+     * @param classe A classe que restringe os relatos a serem empregados
+     *               na avaliação da regra.
+     *
+     * @throws CampoExigidoNaoFornecido Caso um campo obrigatório para a
+     *                                  definição de uma regra não seja
+     *                                  fornecido.
+     */
+    public Regra(final String resultado,
+                 final String detalhes,
+                 final float maximo,
+                 final float minimo,
+                 final String classe) {
+        this(resultado, detalhes, maximo, minimo);
+
+        this.classe = classe;
     }
 
     public Regra() {
@@ -192,6 +231,15 @@ public abstract class Regra {
     public final String getVariavel() {
         return variavel;
     }
+
+    /**
+     * Obtém o identificador da classe que restringe os relatos
+     * a serem empregados na avaliação da regra.
+     *
+     * @return Classe dos relatos a serem empregados na avaliação
+     * da regra.
+     */
+    public final String getClasse() { return classe; }
 
     /**
      * Lista de dependeDe diretamente empregados

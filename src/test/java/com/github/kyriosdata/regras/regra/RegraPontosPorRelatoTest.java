@@ -28,7 +28,7 @@ public class RegraPontosPorRelatoTest {
     @Test
     public void agradaCobertura() {
         RegraPontosPorRelato rp = new RegraPontosPorRelato("v", "d", 1, 0, "a", 1);
-        assertEquals("a", rp.getTipoRelato());
+        assertEquals("a", rp.getClasse());
         assertEquals(1f, rp.getPontosPorItem(), 0.0001f);
     }
 

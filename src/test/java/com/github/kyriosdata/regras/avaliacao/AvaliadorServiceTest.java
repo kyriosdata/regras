@@ -3,6 +3,7 @@ package com.github.kyriosdata.regras.avaliacao;
 import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.regra.Regra;
+import com.github.kyriosdata.regras.regra.RegraCondicional;
 import com.github.kyriosdata.regras.regra.RegraExpressao;
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +45,7 @@ public class AvaliadorServiceTest {
         Map<String, Valor> r = as.avalia(regras, null, null, null);
 
         assertEquals(1, r.size());
-        assertEquals(0f, r.get("x").getReal(), 0.0001d);
+        assertEquals(-1f, r.get("x").getReal(), 0.0001d);
     }
 
     @Test
@@ -62,7 +63,25 @@ public class AvaliadorServiceTest {
         Map<String, Valor> r = as.avalia(regras, relatos, null, parametros);
 
         assertEquals(2, r.size());
-        assertEquals(1.23f, r.get("x").getReal(), 0.0001d);
+        assertEquals(0.23f, r.get("x").getReal(), 0.0001d);
+    }
+
+    @Test
+    public void umaCondicao() {
+        AvaliadorService as = new AvaliadorService();
+
+        List<Regra> regras = new ArrayList();
+        regras.add(getCondicao());
+
+        Map<String, Valor> parametros = new HashMap<>(1);
+        parametros.put("b", new Valor(3f));
+
+        List<Relato> relatos = new ArrayList<>(0);
+
+        Map<String, Valor> r = as.avalia(regras, relatos, null, parametros);
+
+        assertEquals(2, r.size());
+        assertEquals(3f, r.get("x").getReal(), 0.0001d);
     }
 
     private Regra getConstante() {
@@ -70,6 +89,10 @@ public class AvaliadorServiceTest {
     }
 
     private Regra getExpressao() {
-        return new RegraExpressao("x", "d", 10f, 0f, "a");
+        return new RegraExpressao("x", "d", 10f, 0f, "a + (2 - 3)");
+    }
+
+    private Regra getCondicao() {
+        return new RegraCondicional("x", "d", 10f, 0f, "2 < b", "b", "0");
     }
 }

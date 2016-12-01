@@ -31,20 +31,6 @@ public class AvaliadorService {
     private List<Observacao> observacoes;
 
     /**
-     * Serviço de avaliação de regra a ser utilizado pelo Avaliador.
-     */
-    private final AvaliaRegraService regraService;
-
-    /**
-     * Cria instância do serviço de avaliador.
-     *
-     * @param regraService Serviço de regra a ser utilizado.
-     */
-    public AvaliadorService(AvaliaRegraService regraService) {
-        this.regraService = regraService;
-    }
-
-    /**
      * Avalia os relatos conforme as regras fornecidas, as observações e os
      * parâmetros.
      *
@@ -73,6 +59,11 @@ public class AvaliadorService {
         // Acumula valores produzidos pela avaliação.
         Map<String, Valor> resultados = new HashMap<>();
 
+        // Se não forem definidas regras, então não há o que avaliar
+        if (regras == null || regras.size() == 0) {
+            return resultados;
+        }
+
         // Parâmetros fornecidos devem estar disponíveis na avaliação
         if (parametros != null) {
             // Valores iniciais devem estar disponíveis
@@ -99,7 +90,7 @@ public class AvaliadorService {
             List<Avaliavel> relatosRelevantes = relatosPorTipo.get("tipo");
 
             // Avalie a regra, para o contexto disponível.
-            Valor valor = regraService.avalia(regra, resultados, relatosRelevantes);
+            Valor valor = regra.avalie(relatosRelevantes, resultados);
 
             // Valor produzido deve ser adicionado ao contexto.
             String variavel = regra.getVariavel();

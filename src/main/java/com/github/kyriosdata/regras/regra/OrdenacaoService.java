@@ -41,10 +41,15 @@ public final class OrdenacaoService {
      * serem avaliadas.
      *
      * @param regras Regras a serem ordenadas.
-     * @return Sequência de itens a serem executadas
-     * nessa ordem.
+     * @return Sequência de regras na ordem em que devem ser
+     * executadas. Se nenhuma regra é fornecida, então a lista
+     * retornada é vazia.
      */
     public static List<Regra> ordena(final List<Regra> regras) {
+        if (regras == null || regras.size() == 0) {
+            return new ArrayList<>(0);
+        }
+
         int size = regras.size();
         List<Regra> ordenados = new ArrayList<>(size);
 

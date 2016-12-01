@@ -28,7 +28,8 @@ public class AvaliadorServiceTest {
         regras.add(getExpressao());
         Map<String, Valor> r = as.avalia(regras, null, null, null);
 
-        assertEquals(0, r.size());
+        assertEquals(1, r.size());
+        assertEquals(3f, r.get("x").getReal(), 0.0001d);
     }
 
     private Regra getExpressao() {

@@ -5,11 +5,13 @@
 
 package com.github.kyriosdata.regras.avaliacao;
 
+import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
 import com.github.kyriosdata.regras.Observacao;
 import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
+import com.github.kyriosdata.regras.infraestrutura.ParserAdapter;
 import com.github.kyriosdata.regras.regra.OrdenacaoService;
 import com.github.kyriosdata.regras.regra.Regra;
 
@@ -64,9 +66,16 @@ public class AvaliadorService {
             return resultados;
         }
 
+        // Se nenhuma observação é fornecida, trate-a como lista vazia
+        Map<String, Valor> prioridade = observacoes;
+        if (prioridade == null) {
+            prioridade = new HashMap<>(0);
+        }
+
         // Preparação das regras
+        IParser parser = new ParserAdapter();
         for(Regra regra : regras) {
-            regra.preparacao(null);
+            regra.preparacao(parser);
         }
 
         // Parâmetros fornecidos devem estar disponíveis na avaliação
@@ -102,8 +111,8 @@ public class AvaliadorService {
 
             // Contudo, pode ser que uma "substituição" deva prevalecer
             // Ou seja, o valor produzido deve ceder para o fornecido.
-            if (observacoes.containsKey(variavel)) {
-                valor = observacoes.get(variavel);
+            if (prioridade.containsKey(variavel)) {
+                valor = prioridade.get(variavel);
             }
 
             // Acrescenta o valor calculado (ou o que deve prevalecer)
@@ -119,11 +128,17 @@ public class AvaliadorService {
      *
      * @param relatos Conjunto de relatos.
      * @return Dicionário que reúne os relatos fornecidos pelos tipos
-     * correspondentes.
+     * correspondentes. Se nenhum relato é fornecido como argumento,
+     * então o dicionário retornado é vazio.
      */
     private Map<String, List<Avaliavel>> montaRelatosPorTipo(
             final List<Relato> relatos) {
         Map<String, List<Avaliavel>> relatosPorTipo = new HashMap<>();
+
+        if (relatos == null || relatos.size() == 0) {
+            return relatosPorTipo;
+        }
+
         for (Relato relato : relatos) {
             String tipo = relato.getClasse();
 

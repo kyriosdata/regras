@@ -12,6 +12,7 @@ import com.github.kyriosdata.regras.Funcao;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -114,6 +115,20 @@ public abstract class Regra {
     private List<Funcao> funcoes;
 
     /**
+     * Representa lista vazia de funções.
+     */
+    private final static List<Funcao> vazia = new ArrayList<>(0);
+
+    /**
+     * Obtém a lista de funções associadas à regra.
+     *
+     * @return Conjunto de funções empregado pela regra.
+     */
+    public List<Funcao> getFuncoes() {
+        return funcoes;
+    }
+
+    /**
      * Cria uma regra.
      *
      * @param resultado      O identificador (nome) da variável que retém o
@@ -154,6 +169,7 @@ public abstract class Regra {
         this.valorMaximo = maximo;
         this.valorMinimo = minimo;
         this.variavel = resultado;
+        this.funcoes = vazia;
     }
 
     /**
@@ -187,9 +203,8 @@ public abstract class Regra {
         this(resultado, detalhes, maximo, minimo);
 
         this.classe = classe;
-        this.funcoes = null;
+        this.funcoes = vazia;
     }
-
 
     /**
      * Cria uma regra.
@@ -224,7 +239,7 @@ public abstract class Regra {
         this(resultado, detalhes, maximo, minimo);
 
         this.classe = classe;
-        this.funcoes = funcoes;
+        this.funcoes = funcoes == null ? vazia : funcoes;
     }
 
     public Regra() {

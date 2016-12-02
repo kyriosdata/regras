@@ -9,6 +9,7 @@ package com.github.kyriosdata.regras.regra;
 import com.github.kyriosdata.parser.Expressao;
 import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
+import com.github.kyriosdata.regras.Funcao;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 
@@ -122,11 +123,16 @@ public class RegraExpressao extends Regra {
     public Valor avalie(List<? extends Avaliavel> avaliaveis, Map<String, Valor> contexto) {
         atualizaContexto(contexto);
 
+        // Avalia eventuais funções empregadas pela regra.
+        for(Funcao f : getFuncoes()) {}
+
         return new Valor(ast.valor(ctx));
     }
 
     /**
-     * Atualiza o contexto da expressão antes que possa ser executada.
+     * As variáveis empregadas na avaliação da expressão e para as quais há
+     * valor correspondente fornecido pelo contexto (argumento), assumirão os
+     * valores definidos pelo contexto.
      *
      * @param contexto Contexto contendo valores para variáveis empregadas
      *                 na avaliação da expressão.

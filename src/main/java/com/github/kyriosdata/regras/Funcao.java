@@ -10,6 +10,7 @@ import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 import com.github.kyriosdata.regras.regra.Regra;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Uma função é o meio para realizar algumas operações
@@ -27,7 +28,7 @@ import java.util.List;
  *
  * @see Regra
  */
-public class Funcao {
+public abstract class Funcao {
 
     /**
      * Identificador do resultado da função
@@ -84,4 +85,13 @@ public class Funcao {
     public int getCodigo() {
         return codigo;
     }
+
+    /**
+     * Obtém o valor da função.
+     *
+     * @param contexto Parâmetros eventualmente empregados pela função.
+     *
+     * @return O valor produzido pela avaliação da função.
+     */
+    public abstract float valor(Map<String, Valor> contexto);
 }

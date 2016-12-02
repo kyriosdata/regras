@@ -17,27 +17,6 @@ public class FuncaoTest {
         assertEquals(14, calculo(12, 1, 2));
     }
 
-    public float gilmar(int mesInicio, int mesFim, int difAno) {
-        int meses = 1;
-
-        if (difAno > 0) {
-            meses += (difAno - 1) * 12;
-        }
-
-        if (mesInicio > mesFim) {
-            meses += 12 - mesInicio + mesFim;
-        } else {
-            if (difAno > 0) {
-                meses += 12;
-            }
-
-            meses += (mesFim - mesInicio);
-        }
-
-        return (float) meses;
-    }
-
-
     /**
      * Obtém o total de meses, contando o mês de início, a partir do
      * mês de ínicio, até o mês de fim, e a diferença em anos.

@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @see Regra
  */
-public class Funcao {
+public abstract class Funcao {
 
     /**
      * Identificador do resultado da função
@@ -84,4 +84,11 @@ public class Funcao {
     public int getCodigo() {
         return codigo;
     }
+
+    /**
+     * Obtém o valor da função.
+     *
+     * @return O valor produzido pela avaliação da função.
+     */
+    public abstract float valor();
 }

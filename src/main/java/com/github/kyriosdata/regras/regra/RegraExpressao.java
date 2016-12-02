@@ -122,11 +122,15 @@ public class RegraExpressao extends Regra {
     public Valor avalie(List<? extends Avaliavel> avaliaveis, Map<String, Valor> contexto) {
         atualizaContexto(contexto);
 
+        // Avalia eventuais funções empregadas pela regra.
+
         return new Valor(ast.valor(ctx));
     }
 
     /**
-     * Atualiza o contexto da expressão antes que possa ser executada.
+     * As variáveis empregadas na avaliação da expressão e para as quais há
+     * valor correspondente fornecido pelo contexto (argumento), assumirão os
+     * valores definidos pelo contexto.
      *
      * @param contexto Contexto contendo valores para variáveis empregadas
      *                 na avaliação da expressão.

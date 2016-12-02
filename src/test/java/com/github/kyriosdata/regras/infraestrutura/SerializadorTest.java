@@ -109,7 +109,6 @@ public class SerializadorTest {
         Relato r = new Relato("classe", atributos);
 
         String json = sz.toJson(r);
-        System.out.println(json);
 
         Relato recuperado = sz.relato(json);
 

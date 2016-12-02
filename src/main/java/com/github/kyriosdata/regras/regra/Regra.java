@@ -8,6 +8,7 @@ package com.github.kyriosdata.regras.regra;
 
 import com.github.kyriosdata.parser.IParser;
 import com.github.kyriosdata.regras.Avaliavel;
+import com.github.kyriosdata.regras.Funcao;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.excecoes.CampoExigidoNaoFornecido;
 
@@ -108,6 +109,11 @@ public abstract class Regra {
     private String classe;
 
     /**
+     * Conjunto de funções empregadas pela regra.
+     */
+    private List<Funcao> funcoes;
+
+    /**
      * Cria uma regra.
      *
      * @param resultado      O identificador (nome) da variável que retém o
@@ -181,6 +187,44 @@ public abstract class Regra {
         this(resultado, detalhes, maximo, minimo);
 
         this.classe = classe;
+        this.funcoes = null;
+    }
+
+
+    /**
+     * Cria uma regra.
+     *
+     * @param resultado      O identificador (nome) da variável que retém o
+     *                      valor da avaliação da regra. Em um dado conjunto de
+     *                      regras, existe uma variável distinta para cada uma
+     *                      delas.
+     * @param detalhes     Texto que fornece alguma explanação sobre a regra.
+     * @param maximo   O valor máximo a ser utilizado como resultado da
+     *                      avaliação da regra. Esse valor é empregado apenas
+     *                      se a avaliação resultar em valor superior ao
+     *                      expresso por esse parâmetro.
+     * @param minimo   O valor mínimo a ser utilizado como resultado da
+     *                      avaliação da regra. Esse valor é empregado apenas
+     *                      se a avaliação resultar em valor inferior ao
+     *                      expresso por esse parâmetro.
+     * @param classe A classe que restringe os relatos a serem empregados
+     *               na avaliação da regra.
+     *
+     * @param funcoes O conjunto de funções empregadas pela regra.
+     * @throws CampoExigidoNaoFornecido Caso um campo obrigatório para a
+     *                                  definição de uma regra não seja
+     *                                  fornecido.
+     */
+    public Regra(final String resultado,
+                 final String detalhes,
+                 final float maximo,
+                 final float minimo,
+                 final String classe,
+                 final List<Funcao> funcoes) {
+        this(resultado, detalhes, maximo, minimo);
+
+        this.classe = classe;
+        this.funcoes = funcoes;
     }
 
     public Regra() {

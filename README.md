@@ -41,32 +41,53 @@ variáveis "x" e "y". O resultado é associado à variável identificada
 por "soma". A variável deve ser única em um conjunto de regras, 
 ou seja, não é permitido outra regra que deve ser avaliada juntamente 
 com aquela abaixo e também define como variável o identificador 
-"soma".
+"soma". Dessa forma, em outra regra, a variável "soma" pode fazer
+parte da expressão.
 
-`{ "tipo": "expressao", "variavel": "soma", 
-   "expressao": "x + y" }`
+````
+{ 
+   "tipo"      : "expressao", 
+   "variavel"  : "soma", 
+   "expressao" : "x + y" 
+}
+````
    
-Uma regra pode possuir vários atributos, alguns deles são predefinidos, 
+Uma regra possui alguns atributos predefinidos, 
 por exemplo, "valorMaximo". Enquanto a regra acima pode resultar no 
 valor 150, por exemplo, para os valores de x e y, 100 e 50, respectivamente,
 aquela abaixo teria como resultado o valor 107 para os mesmos valores de
 x e y, pois 107 é o valor máximo indicado para essa regra.
 
-`{ "variavel": "soma", 
-   "expressao": "x + y",
-    "valorMaximo" : 107 }`
+````
+{ 
+  "variavel"    : "soma", 
+  "expressao"   : "x + y",
+  "valorMaximo" : 107 
+}
+````
     
 ## O que é uma configuração?
 Em geral estamos interessados na avaliação de várias regras. Configuração
 é o meio que permite reunir várias regras. Abaixo segue uma configuração 
-que reúne as duas regras citadas acima.
+formada por duas regras.
 
-`{ "regras" : [
-   { "variavel": "soma", 
-   "expressao": "x + y",
-    "valorMaximo" : 107 },
-    { "tipo": "expressao", "variavel": "soma", 
-       "expressao": "x + y" }]}`
+````
+{ 
+  "regras" : 
+  [
+    { 
+       "variavel" : "soma", 
+       "expressao" : "x + y",
+       "valorMaximo" : 107 
+    },
+    { 
+      "tipo" : "expressao", 
+      "variavel" : "somaLimitada", 
+      "expressao" : "x + y" 
+    }
+  ]
+}
+````
 
 ## Quais são as entradas/saídas?
 As entradas são definids por objetos JSON. Os atributos desses

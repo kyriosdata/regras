@@ -76,6 +76,7 @@ formada por duas regras.
   "regras" : 
   [
     { 
+       "tipo"        : "expressao",
        "variavel"    : "soma", 
        "expressao"   : "x + y",
        "valorMaximo" : 107 
@@ -92,7 +93,7 @@ formada por duas regras.
 ## Quais são as entradas/saídas?
 As entradas são definids por objetos JSON. Os atributos desses
 objetos, quaisquer que sejam eles, são tratados como variáveis
-pelas regras. Por exemplo, para o objeto JSON abaixo
+pelas regras. Por exemplo, para o relato (objeto JSON) abaixo
 
 ````
 { 
@@ -110,12 +111,13 @@ fornecido como entrada para a execução da regra
 }
 ````
 
-o resultado produzido é 180, que passa a estar disponível por meio do atributo 
+o resultado é uma pontuação, nesse caso, o valor resultante é 180, 
+que passa a estar disponível por meio do atributo 
 "alturaEmCentimetros" no objeto JSON retornado
 
 ````
 { 
-  "valores" : 
+  "pontuacoes" : 
   [ 
     { 
       "atributo" : "alturaEmCentimetros", 
@@ -128,37 +130,13 @@ o resultado produzido é 180, que passa a estar disponível por meio do atributo
   ] 
 }
 ````
-    
+
+O JSON acima representa uma contagem, ou seja, o resultado
+da aplicação de regras (configuração) a um conjunto de 
+relatos (relatório).
+
 ## Como executar um conjunto de regras?
 
-A execução de uma regra produz um valor, associado à variável em 
-questão, ou seja, um objeto JSON correspondente típico é 
-ilustrado abaixo.
-
-````
-{ 
-  "alturaEmCentimetros" : 180 
-}
-````
-
-Quando um conjunto de regras é executado, temos como resultado
-um conjunto de valores (objetos como aqueles acima). Um objeto 
-resultado em JSON é ilustrado abaixo.
-
-````
-{ 
-  "valores" : 
-  [ 
-    { 
-      "x": 1 
-    }, 
-    { 
-      "quente": true 
-    } 
-  ] 
-}
-````
- 
 A execução de várias regras, uma configuração, produz uma
 coleção de valores, conforme ilustrado pelo método abaixo. 
 

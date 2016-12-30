@@ -17,7 +17,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public class CustomTypeAdapterFactory implements TypeAdapterFactory {
+public class CustomRegraTypeAdapterFactory implements TypeAdapterFactory {
 
     private String[] classes = { "RegraExpressao", "RegraPontosPorRelato"};
     private String[] tipos = { "expressao", "pontosPorRelato"};
@@ -59,11 +59,11 @@ public class CustomTypeAdapterFactory implements TypeAdapterFactory {
                 JsonElement obj = object.get("obj").getAsJsonObject();
 
                 if ("expressao".equals(clazz)) {
-                    return (T) gson.getDelegateAdapter(CustomTypeAdapterFactory.this, TypeToken.get(RegraExpressao.class)).fromJsonTree(obj);
+                    return (T) gson.getDelegateAdapter(CustomRegraTypeAdapterFactory.this, TypeToken.get(RegraExpressao.class)).fromJsonTree(obj);
                 }
 
                 if ("pontosPorRelato".equals(clazz)) {
-                    return (T) gson.getDelegateAdapter(CustomTypeAdapterFactory.this, TypeToken.get(RegraPontosPorRelato.class)).fromJsonTree(obj);
+                    return (T) gson.getDelegateAdapter(CustomRegraTypeAdapterFactory.this, TypeToken.get(RegraPontosPorRelato.class)).fromJsonTree(obj);
                 }
 
                 throw new JsonParseException ("Erro ao desserializar " + type + ". Não é uma regra?");

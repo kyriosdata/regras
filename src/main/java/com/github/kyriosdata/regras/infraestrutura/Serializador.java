@@ -8,6 +8,7 @@ package com.github.kyriosdata.regras.infraestrutura;
 
 import com.github.kyriosdata.regras.Pontuacao;
 import com.github.kyriosdata.regras.Relato;
+import com.github.kyriosdata.regras.Relatorio;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
@@ -30,6 +31,7 @@ public class Serializador {
     private static Type regraType;
     private static Type configuracaoType;
     private static Type relatoType;
+    private static Type relatorioType;
 
     /**
      * Cria instância de serializar preparada
@@ -46,7 +48,7 @@ public class Serializador {
         GsonBuilder gb = new GsonBuilder();
         gb.registerTypeAdapter(Valor.class, new ValorSerializer());
         gb.registerTypeAdapter(Valor.class, new ValorDeserializer());
-        gb.registerTypeAdapterFactory(new CustomTypeAdapterFactory());
+        gb.registerTypeAdapterFactory(new CustomRegraTypeAdapterFactory());
         gson = gb.create();
 
         valorType = new TypeToken<Valor>() {}.getType();
@@ -54,6 +56,7 @@ public class Serializador {
         regraType = new TypeToken<Regra>() {}.getType();
         configuracaoType = new TypeToken<Configuracao>() {}.getType();
         relatoType = new TypeToken<Relato>() {}.getType();
+        relatorioType = new TypeToken<Relatorio>() {}.getType();
     }
 
     /**
@@ -113,6 +116,14 @@ public class Serializador {
 
     public String toJson(Relato v) {
         return gson.toJson(v, relatoType);
+    }
+
+    public Relatorio relatorio(String json) {
+        return gson.fromJson(json, relatorioType);
+    }
+
+    public String toJson(Relatorio v) {
+        return gson.toJson(v, relatorioType);
     }
 }
 

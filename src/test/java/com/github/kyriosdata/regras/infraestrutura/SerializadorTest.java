@@ -2,6 +2,7 @@ package com.github.kyriosdata.regras.infraestrutura;
 
 import com.github.kyriosdata.regras.Pontuacao;
 import com.github.kyriosdata.regras.Relato;
+import com.github.kyriosdata.regras.Relatorio;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.regra.Configuracao;
 import com.github.kyriosdata.regras.regra.Regra;
@@ -111,6 +112,26 @@ public class SerializadorTest {
         String json = sz.toJson(r);
 
         Relato recuperado = sz.relato(json);
+
+        assertEquals(json, sz.toJson(recuperado));
+    }
+
+    @Test
+    public void serializarRelatorio() {
+        Map<String, Valor> atributos = new HashMap<>();
+        atributos.put("peso", new Valor(49f));
+
+        Relato r1 = new Relato("r1", atributos);
+        Relato r2 = new Relato("r2", atributos);
+
+        List<Relato> relatos = new ArrayList<>(2);
+        relatos.add(r1);
+        relatos.add(r2);
+        Relatorio relatorio = new Relatorio("relatorio", 2016, relatos);
+
+        String json = sz.toJson(relatorio);
+
+        Relatorio recuperado = sz.relatorio(json);
 
         assertEquals(json, sz.toJson(recuperado));
     }

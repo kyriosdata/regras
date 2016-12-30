@@ -76,13 +76,13 @@ formada por duas regras.
   "regras" : 
   [
     { 
-       "variavel" : "soma", 
-       "expressao" : "x + y",
+       "variavel"    : "soma", 
+       "expressao"   : "x + y",
        "valorMaximo" : 107 
     },
     { 
-      "tipo" : "expressao", 
-      "variavel" : "somaLimitada", 
+      "tipo"      : "expressao", 
+      "variavel"  : "somaLimitada", 
       "expressao" : "x + y" 
     }
   ]
@@ -91,19 +91,43 @@ formada por duas regras.
 
 ## Quais são as entradas/saídas?
 As entradas são definids por objetos JSON. Os atributos desses
-objetos, quaisquer que sejam eles, são tratados como variáveis. 
-Por exemplo, para o objeto JSON abaixo
+objetos, quaisquer que sejam eles, são tratados como variáveis
+pelas regras. Por exemplo, para o objeto JSON abaixo
 
-`{ "altura" : 1.8 }`
+````
+{ 
+  "altura" : 1.8 
+}
+````
 
 fornecido como entrada para a execução da regra 
 
-`{ "tipo" : "expressao", "variavel" : "alturaEmCentimetros", "expressao" : "altura * 100" }`
+````
+{ 
+  "tipo"      : "expressao", 
+  "variavel"  : "alturaEmCentimetros", 
+  "expressao" : "altura * 100" 
+}
+````
 
 o resultado produzido é 180, que passa a estar disponível por meio do atributo 
 "alturaEmCentimetros" no objeto JSON retornado
 
-`{ "valores" : [ { "atributo" : "alturaEmCentimetros", "valor" : { "tipo" : 0, "valor" : 180 }} ] }`
+````
+{ 
+  "valores" : 
+  [ 
+    { 
+      "atributo" : "alturaEmCentimetros", 
+      "valor" : 
+      { 
+        "tipo"  : 0, 
+        "valor" : 180 
+      }
+    } 
+  ] 
+}
+````
     
 ## Como executar um conjunto de regras?
 
@@ -111,30 +135,46 @@ A execução de uma regra produz um valor, associado à variável em
 questão, ou seja, um objeto JSON correspondente típico é 
 ilustrado abaixo.
 
-`{ "alturaEmCentimetros" : 180 }`
+````
+{ 
+  "alturaEmCentimetros" : 180 
+}
+````
 
 Quando um conjunto de regras é executado, temos como resultado
 um conjunto de valores (objetos como aqueles acima). Um objeto 
 resultado em JSON é ilustrado abaixo.
 
-`{ "valores" : [ { "x": 1 }, { "quente": true } ] }`
+````
+{ 
+  "valores" : 
+  [ 
+    { 
+      "x": 1 
+    }, 
+    { 
+      "quente": true 
+    } 
+  ] 
+}
+````
  
 A execução de várias regras, uma configuração, produz uma
 coleção de valores, conforme ilustrado pelo método abaixo. 
 
-```
+````
 String configuracao = // recupera conjunto de regras (JSON)
 String relatos = // recupera conjunto de objetos (JSON)
 String parametros = // recupera valores iniciais (JSON)
 Contagem resultado = Regras.avalia(configuracao, relatos, parametros);
-```
+````
 
 Observe que o resultado é uma instância de `Contagem`. A versão JSON
 pode ser obtida com 
 
-```
+````
 String resultado = Regras.avaliaAsJson(configuracao, relatos, parametros);
-```
+````
 
 Nesse ponto podemos ilustrar uma chamada completa para avaliação de
 uma regra. 

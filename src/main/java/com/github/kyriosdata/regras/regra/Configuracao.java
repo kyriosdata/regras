@@ -13,8 +13,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Reúne regras para a avaliação de relatórios.
+ * Define conjunto de regras a ser utilizado em
+ * uma avaliação, ou seja, sobre um relatório para
+ * produzir uma contagem.
  *
+ * @see com.github.kyriosdata.regras.Contagem
+ * @see com.github.kyriosdata.regras.Relatorio
  */
 public class Configuracao extends Entidade {
 

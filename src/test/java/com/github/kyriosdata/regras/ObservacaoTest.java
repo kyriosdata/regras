@@ -11,6 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ObservacaoTest {
 
     @Test
+    public void semNovoImplicaRemocao() {
+        Avaliavel o = new Pontuacao("o", new Valor("o"));
+        Observacao ok = new Observacao(o, null, "ok");
+        assertTrue(ok.isRemocao());
+    }
+
+    @Test
+    public void origemDestinoPeloMenosUm() {
+        assertThrows(CampoExigidoNaoFornecido.class, () -> new Observacao(null, null,"ok"));
+    }
+
+    @Test
     public void montaRecuperaCorretamenteUmaNota() {
         Avaliavel o = new Pontuacao("o", new Valor("o"));
         Avaliavel s = new Pontuacao("s", new Valor("o"));

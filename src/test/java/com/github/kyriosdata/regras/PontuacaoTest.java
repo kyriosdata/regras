@@ -8,6 +8,23 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PontuacaoTest {
 
     @Test
+    public void classePontuacao() {
+        Pontuacao p = new Pontuacao("p", new Valor(-21.4f));
+
+        assertEquals("pontuacao", p.getClasse());
+    }
+
+    @Test
+    public void pontuacaoEquals() {
+        Pontuacao p1 = new Pontuacao("p1", new Valor(-21.4f));
+        Pontuacao p2 = new Pontuacao("p2", new Valor(-21.4f));
+
+        assertEquals(p1.hashCode(), p1.hashCode());
+        assertFalse(p1.equals(p2));
+        assertFalse(p1.equals("a"));
+    }
+
+    @Test
     public void montaRecuperaPontuacao() {
         Pontuacao p = new Pontuacao("p", new Valor(-21.4f));
 

@@ -21,6 +21,11 @@ public class PontuacaoTest {
 
         assertEquals(p1.hashCode(), p1.hashCode());
         assertFalse(p1.equals(p2));
+    }
+
+    @Test
+    public void pontuacaoNotEqualsToOtherObject() {
+        Pontuacao p1 = new Pontuacao("p1", new Valor(-21.4f));
         assertFalse(p1.equals("a"));
     }
 

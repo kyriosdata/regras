@@ -96,7 +96,6 @@ public class SerializadorTest {
         Configuracao c = new Configuracao("c", "d", "detalhes", new Date(), n);
 
         String json = sz.toJson(c);
-        System.out.println(json);
         Configuracao recuperada = sz.configuracao(json);
 
         assertEquals(json, sz.toJson(recuperada));
@@ -110,7 +109,6 @@ public class SerializadorTest {
         Relato r = new Relato("classe", atributos);
 
         String json = sz.toJson(r);
-
         Relato recuperado = sz.relato(json);
 
         assertEquals(json, sz.toJson(recuperado));

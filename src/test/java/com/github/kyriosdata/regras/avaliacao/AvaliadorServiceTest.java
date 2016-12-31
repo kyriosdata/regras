@@ -104,21 +104,19 @@ public class AvaliadorServiceTest {
         return new RegraCondicional("x", "d", 10f, 0f, "2 < b", "b", "0");
     }
 
-    private String getFullFile(String filename) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(filename).getFile());
-        return file.getAbsolutePath();
-    }
-
     @Test
     public void testesDeArquivosJson() throws IOException {
-        String cfgFile = getFullFile("configuracao.json");
-        System.out.println(cfgFile);
-        Path path = Paths.get(cfgFile);
-
-        String contents = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+        String contents = getContentOfFile("configuracao.json");
         Serializador sz = new Serializador();
         Configuracao c = sz.configuracao(contents);
-        System.out.println(c);
+    }
+
+    private String getContentOfFile(String name) throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(name).getFile());
+        String cfgFile = file.getAbsolutePath();
+        Path path = Paths.get(cfgFile);
+
+        return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
     }
 }

@@ -65,6 +65,19 @@ public class ValorTest {
     }
 
     @Test
+    public void valorDiferenteDeOutroObjeto() {
+        assertFalse(new Valor(1f).equals("ok"));
+    }
+
+    @Test
+    public void hashCodeComparado() {
+        Valor v1 = new Valor(1f);
+        Valor v2 = new Valor(2f);
+        assertEquals(v1.hashCode(), v1.hashCode());
+        assertNotEquals(v1.hashCode(), v2.hashCode());
+    }
+
+    @Test
     public void umaDataInvalida() {
         assertNull(Valor.dataFromString("01/02"));
     }

@@ -35,8 +35,10 @@ public class AvaliadorServiceTest {
     @Test
     public void umaRegraConstante() {
         AvaliadorService as = new AvaliadorService();
+
         List<Regra> regras = new ArrayList();
         regras.add(getConstante());
+
         Map<String, Valor> r = as.avalia(regras, null, null, null);
 
         assertEquals(1, r.size());
@@ -79,7 +81,7 @@ public class AvaliadorServiceTest {
         AvaliadorService as = new AvaliadorService();
 
         List<Regra> regras = new ArrayList();
-        regras.add(getCondicao());
+        regras.add(getCondicao()); // 2 < b então b, senão 0
 
         Map<String, Valor> parametros = new HashMap<>(1);
         parametros.put("b", new Valor(3f));
@@ -90,6 +92,14 @@ public class AvaliadorServiceTest {
 
         assertEquals(2, r.size());
         assertEquals(3f, r.get("x").getReal(), 0.0001d);
+
+        // Altera para condição resultar em false
+        parametros.put("b", new Valor(1f));
+
+        // Novo valor para a mesma regra (condição false)
+        r = as.avalia(regras, relatos, null, parametros);
+        assertEquals(2, r.size());
+        assertEquals(0f, r.get("x").getReal(), 0.0001d);
     }
 
     private Regra getConstante() {

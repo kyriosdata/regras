@@ -105,6 +105,7 @@ public class SerializadorTest {
     public void serializarRelato() {
         Map<String, Valor> atributos = new HashMap<>();
         atributos.put("idade", new Valor(49f));
+        atributos.put("aposentado", new Valor(false));
 
         Relato r = new Relato("classe", atributos);
 

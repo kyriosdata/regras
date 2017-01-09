@@ -15,8 +15,7 @@ import java.util.Map;
 
 /**
  * Interface a ser implementada por qualquer classe cujas
- * instâncias serão empregadas para a avaliação de regras
- * de progressão, promoção ou estágio probatório na UFG.
+ * instâncias serão empregadas para a avaliação de regras.
  *
  * <p>Observe que a implementação dessa interface não produz
  * um "relatório", mas os valores que serão empregados na

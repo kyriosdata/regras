@@ -102,6 +102,32 @@ public class AvaliadorServiceTest {
         assertEquals(0f, r.get("x").getReal(), 0.0001d);
     }
 
+    @Test
+    public void umaRegraDependenteDeOutraRegra() {
+        AvaliadorService as = new AvaliadorService();
+
+        Regra r1 = new RegraExpressao("x", "d", 10f, 0f, "a + b");
+        Regra r2 = new RegraExpressao("y", "d", 10f, 0f, "2 * x");
+
+        List<Regra> regras = new ArrayList();
+        regras.add(r2);
+        regras.add(r1);
+
+        Map<String, Valor> parametros = new HashMap<>(1);
+        parametros.put("a", new Valor(1f));
+        parametros.put("b", new Valor(2f));
+
+        List<Relato> relatos = new ArrayList<>(0);
+
+        Map<String, Valor> r = as.avalia(regras, relatos, null, parametros);
+
+        assertEquals(4, r.size());
+        assertEquals(1f, r.get("a").getReal(), 0.0001d);
+        assertEquals(2f, r.get("b").getReal(), 0.0001d);
+        assertEquals(3f, r.get("x").getReal(), 0.0001d);
+        assertEquals(6f, r.get("y").getReal(), 0.0001d);
+    }
+
     private Regra getConstante() {
         return new RegraExpressao("x", "d", 10f, 0f, "3");
     }

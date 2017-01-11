@@ -11,7 +11,8 @@ import com.github.kyriosdata.regras.Relato;
 import com.github.kyriosdata.regras.Relatorio;
 import com.github.kyriosdata.regras.Valor;
 import com.github.kyriosdata.regras.regra.Configuracao;
-import com.github.kyriosdata.regras.regra.Regra;
+import com.github.kyriosdata.regras.regra.RegraExpressao;
+import com.github.kyriosdata.regras.regra.RegraPontosPorRelato;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -28,7 +29,8 @@ public class Serializador {
     private static Gson gson;
     private static Type valorType;
     private static Type pontuacaoType;
-    private static Type regraType;
+    private static Type regraExpressaoType;
+    private static Type regraPontosPorRelato;
     private static Type configuracaoType;
     private static Type relatoType;
     private static Type relatorioType;
@@ -53,7 +55,8 @@ public class Serializador {
 
         valorType = new TypeToken<Valor>() {}.getType();
         pontuacaoType = new TypeToken<Pontuacao>() {}.getType();
-        regraType = new TypeToken<Regra>() {}.getType();
+        regraExpressaoType = new TypeToken<RegraExpressao>() {}.getType();
+        regraPontosPorRelato = new TypeToken<RegraPontosPorRelato>() {}.getType();
         configuracaoType = new TypeToken<Configuracao>() {}.getType();
         relatoType = new TypeToken<Relato>() {}.getType();
         relatorioType = new TypeToken<Relatorio>() {}.getType();
@@ -94,12 +97,20 @@ public class Serializador {
         return gson.fromJson(json, pontuacaoType);
     }
 
-    public Regra regra(String json) {
-        return gson.fromJson(json, regraType);
+    public RegraExpressao regraExpressao(String json) {
+        return gson.fromJson(json, regraExpressaoType);
     }
 
-    public String toJson(Regra v) {
-        return gson.toJson(v, regraType);
+    public String toJson(RegraExpressao v) {
+        return gson.toJson(v, regraExpressaoType);
+    }
+
+    public RegraPontosPorRelato regraPontosPorRelato(String json) {
+        return gson.fromJson(json, regraPontosPorRelato);
+    }
+
+    public String toJson(RegraPontosPorRelato v) {
+        return gson.toJson(v, regraPontosPorRelato);
     }
 
     public Configuracao configuracao(String json) {
@@ -125,6 +136,9 @@ public class Serializador {
     public String toJson(Relatorio v) {
         return gson.toJson(v, relatorioType);
     }
+
+    // TODO Serializacao de coleção polimórfica exige custom serializer (as shown below)
+    // TODO http://stackoverflow.com/questions/19588020/gson-serialize-a-list-of-polymorphic-objects
 }
 
 

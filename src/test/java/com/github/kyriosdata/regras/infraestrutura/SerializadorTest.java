@@ -54,11 +54,19 @@ public class SerializadorTest {
 
     @Test
     public void serializarRegraExpressao() {
-        RegraExpressao regra1 = getRegraExpressao();
-        RegraPontosPorRelato regra2 = getRegraPontosPorRelato();
+        Regra regra1 = getRegraExpressao();
 
-        verificaRegra(regra1);
-        verificaRegra(regra2);
+        verificaRegraExpressao((RegraExpressao)regra1);
+    }
+
+    @Test
+    public void serializarRegraPontosPorRelato() {
+        RegraPontosPorRelato regra = getRegraPontosPorRelato();
+
+        String json = sz.toJson(regra);
+        RegraPontosPorRelato recuperada = sz.regraPontosPorRelato(json);
+
+        assertEquals(regra, recuperada);
     }
 
     private RegraPontosPorRelato getRegraPontosPorRelato() {
@@ -71,10 +79,9 @@ public class SerializadorTest {
 
     @Test
     public void valoresPadraoParaRegraExpressao() {
-        String json = "{ \"tipo\" : \"expressao\", \"obj\" : " +
-                "{ \"variavel\": \"soma\", \"expressao\": \"x + y\" } }";
+        String json = "{ \"variavel\": \"soma\", \"expressao\": \"x + y\" }";
 
-        RegraExpressao recuperada = (RegraExpressao)sz.regra(json);
+        RegraExpressao recuperada = sz.regraExpressao(json);
         assertEquals("x + y", recuperada.getExpressao());
         assertEquals("soma", recuperada.getVariavel());
         assertNull(recuperada.getDescricao());
@@ -82,9 +89,10 @@ public class SerializadorTest {
         assertEquals(Float.MIN_VALUE, recuperada.getValorMinimo(), 0.0001d);
     }
 
-    private void verificaRegra(Regra expressao) {
+    private void verificaRegraExpressao(RegraExpressao expressao) {
         String json = sz.toJson(expressao);
-        Regra recuperada = sz.regra(json);
+        Regra recuperada = sz.regraExpressao(json);
+
         assertEquals(expressao, recuperada);
     }
 
@@ -92,10 +100,14 @@ public class SerializadorTest {
     public void serializarConfiguracao() {
         List<Regra> n = new ArrayList<>();
         n.add(getRegraExpressao());
-        n.add(getRegraPontosPorRelato());
+        //n.add(getRegraPontosPorRelato());
+
         Configuracao c = new Configuracao("c", "d", "detalhes", new Date(), n);
 
         String json = sz.toJson(c);
+
+        System.out.println(json);
+
         Configuracao recuperada = sz.configuracao(json);
 
         assertEquals(json, sz.toJson(recuperada));

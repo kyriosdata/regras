@@ -147,4 +147,24 @@ public class RegraExpressao extends Regra {
             ctx.put(dd, valor);
         }
     }
+
+    @Override
+    public final boolean equals(final Object outro) {
+        if (this == outro) {
+            return true;
+        }
+
+        if (outro == null || getClass() != outro.getClass()) {
+            return false;
+        }
+
+        RegraExpressao regra = (RegraExpressao) outro;
+
+        return expressao.equals(regra.expressao);
+    }
+
+    @Override
+    public final int hashCode() {
+        return expressao.hashCode();
+    }
 }

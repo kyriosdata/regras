@@ -325,7 +325,7 @@ public abstract class Regra {
     }
 
     @Override
-    public final boolean equals(final Object outro) {
+    public boolean equals(final Object outro) {
         if (this == outro) {
             return true;
         }
@@ -340,7 +340,7 @@ public abstract class Regra {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return variavel.hashCode();
     }
 

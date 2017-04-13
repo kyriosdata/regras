@@ -55,7 +55,7 @@ public class RegraPontosPorRelatoTest {
         parser.setDependencias(new ArrayList<>(0));
         rp.preparacao(parser);
 
-        ArrayList<Avaliavel> avaliaveis = new ArrayList<>(2);
+        ArrayList<Avaliavel> avaliaveis = new ArrayList<>(3);
         Avaliavel avaliavel = new Avaliavel() {
             @Override
             public Valor get(String atributo) {
@@ -69,6 +69,17 @@ public class RegraPontosPorRelatoTest {
         };
         avaliaveis.add(avaliavel);
         avaliaveis.add(avaliavel);
+		avaliaveis.add(new Avaliavel() {
+            @Override
+            public Valor get(String atributo) {
+                return null;
+            }
+
+            @Override
+            public String getClasse() {
+                return "qualquer-outra-coisa";
+            }
+        });
 
         assertEquals(16, rp.avalie(avaliaveis, new HashMap<>(0)).getReal(), 0.0001f);
     }

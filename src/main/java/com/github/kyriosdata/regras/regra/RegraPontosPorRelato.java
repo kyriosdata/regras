@@ -78,7 +78,7 @@ public class RegraPontosPorRelato extends Regra {
                         final Map<String, Valor> contexto) {
         int total = 0;
         for (Avaliavel avaliavel : avaliaveis) {
-            if (getClasse().equals(avaliavel.get("classe").getString())) {
+            if (getClasse().equals(avaliavel.getClasse())) {
                 total = total + 1;
             }
         }
